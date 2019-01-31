@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <title>Instagrid</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    {{ form.media }}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>Instagrid</h1>
+        </div>
+        <div class="col-md-6 text-right">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Save"/>
+          </form>
+        </div>
+      </div>
+      
+      <div class="row instagrid-container">
+        {% if posts %}
+          {% for post in posts %}
+            <div class="col-md-4">
+              <img 
+                class="img-fluid" 
+                src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+                alt="">
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+    <style type="text/css">
+      .instagrid-container {
+        background-color: #eee;
+        padding: 15px
+      }
+      .row.instagrid-container img {
+        margin: 15px 0;
+      }
+    </style>
+  </body>
+</html>
